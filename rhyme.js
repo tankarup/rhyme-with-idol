@@ -17,7 +17,7 @@ function init_words(){
 
 //ひらがなをaiueoに変換
 function kana_to_aiueo(text){
-  let aiueo = text;
+  let aiueo = pre_process(text);
   aiueo = aiueo.replace(/[あかさたなはまやらわがざだばぱゃ]/g, 'a');
   aiueo = aiueo.replace(/[いきしちにひみりぎじぢびぴ]/g, 'i');
   aiueo = aiueo.replace(/[うくすつぬふむゆるゔぐずづぶぷゅ]/g, 'u');
@@ -29,12 +29,24 @@ function kana_to_aiueo(text){
 
 }
 
+//かなテキストの前処理
+//「しゃ」→「＊あ」に変換
+function pre_process(text){
+  let processed = text;
+  processed = processed.replace(/.[ぁゃ]/g, '＊あ');
+  processed = processed.replace(/.[ぃ]/g, '＊い');
+  processed = processed.replace(/.[ぅゅ]/g, '＊う');
+  processed = processed.replace(/.[ぇ]/g, '＊え');
+  processed = processed.replace(/.[ぉょ]/g, '＊お');
+  return processed;
+}
+
 function generate_in(){
 
   const text = document.getElementById('textarea').value;
 
   //ひと文字ずつ分解して配列に
-  const text_list = text.split('');
+  const text_list = pre_process(text).split('');
   //分解したものをaiueo配列に
   const aiueo_list = text_list.map(kana => kana_to_aiueo(kana));
 
