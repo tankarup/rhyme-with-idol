@@ -91,6 +91,11 @@ function generate_in(){
   let min_count = 4;
   min_count = document.getElementById('min_count').value;
 
+  //スコア計算用変数
+  //[長さ0のマッチ数, 長さ1のマッチ数, ...]
+  let match_count = Array(30);
+  match_count.fill(0);
+
   //テキストを走査してマッチするアイドルを探す
   let matched_idols = [];
   for (let i = 0; i < text_aiueo.length; i++){
@@ -99,23 +104,39 @@ function generate_in(){
       const aiueo = words[name]['aiueo'];
       const description = words[name]['description'];
 
-      //aiueoの数が規定数以下だったらスキップ
-      if (aiueo.length < min_count) continue;
 
-      //desctiptionにNGワードが入っていたらスキップ
-      let ng = false;
-      for (let ng_word of ng_words){
-        if (description.indexOf(ng_word) > -1) ng = true;
-      }
-      if (ng) continue;
 
       //aieoと文字列がマッチしたら追加
       if (text_aiueo.indexOf(aiueo, i) == i){
+
+        if (aiueo.length < 1) continue;
+
+        //スコア計算用
+        match_count[aiueo.length] += 1;
+
+        //aiueoの数が規定数以下だったらスキップ
+        if (aiueo.length < min_count) continue;
+
+        //desctiptionにNGワードが入っていたらスキップ
+        let ng = false;
+        for (let ng_word of ng_words){
+          if (description.indexOf(ng_word) > -1) ng = true;
+        }
+        if (ng) continue;
+
+        //フィルターを通過したものだけ表示
         idol_names.push(`<span title="${description}">${name}</span><br>(${aiueo})`);
       }
     }
     matched_idols.push(idol_names);
   }
+  //スコア計算
+  let score = 0;
+  for (let i = 0; i < match_count.length; i++){
+    score += Math.pow(i, 4)*match_count[i];
+  }
+  score = score/text.length;
+  document.getElementById('score').innerHTML = `文章のアイマス度： ${score.toFixed(1)}ポイント`;
 
 
   //ＨＴＭＬを出力
