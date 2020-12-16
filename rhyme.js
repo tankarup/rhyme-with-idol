@@ -133,7 +133,7 @@ function generate_in(){
   //スコア計算
   let score = 0;
   for (let i = 0; i < match_count.length; i++){
-    score += Math.pow(i, 4)*match_count[i];
+    score += Math.pow(10, i-1)*match_count[i];
   }
   score = score/text.length;
   document.getElementById('score').innerHTML = `文章のアイマス度： ${score.toFixed(1)}ポイント`;
