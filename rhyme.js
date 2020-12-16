@@ -125,7 +125,7 @@ function generate_in(){
         if (ng) continue;
 
         //フィルターを通過したものだけ表示
-        idol_names.push(`<span title="${description}">${name}</span><br>(${aiueo})`);
+        idol_names.push(`<span title="${name}(${words[name]['kana']})\n${description}">${name}</span><br>(${aiueo})`);
       }
     }
     matched_idols.push(idol_names);
@@ -136,7 +136,7 @@ function generate_in(){
     score += Math.pow(10, i-1)*match_count[i];
   }
   score = score/text.length;
-  document.getElementById('score').innerHTML = `文章のアイマス度： ${score.toFixed(1)}ポイント`;
+  document.getElementById('score').innerHTML = `文章のアイマス度： <span style="font-size: x-large;font-weight: bold;">${Number(score.toFixed(1)).toLocaleString()}</span>ポイント`;
 
 
   //ＨＴＭＬを出力
