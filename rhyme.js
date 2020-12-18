@@ -30,14 +30,23 @@ function kana_to_aiueo(text){
 }
 
 //かなテキストの前処理
-//「しゃ」→「＊あ」に変換
 function pre_process(text){
   let processed = text;
+
+  //「しゃ」→「＊あ」に変換
   processed = processed.replace(/.[ぁゃ]/g, '＊あ');
   processed = processed.replace(/.[ぃ]/g, '＊い');
   processed = processed.replace(/.[ぅゅ]/g, '＊う');
   processed = processed.replace(/.[ぇ]/g, '＊え');
   processed = processed.replace(/.[ぉょ]/g, '＊お');
+
+  //長音がついていたらその前の文字と同じ音に変換
+  processed = processed.replace(/[あかさたなはまやらわがざだばぱゃ]ー/g, 'ああ');
+  processed = processed.replace(/[いきしちにひみゐりぎじぢびぴ]ー/g, 'いい');
+  processed = processed.replace(/[うくすつぬふむゆるゔぐずづぶぷゅ]ー/g, 'うう');
+  processed = processed.replace(/[えけせてねへめゑれげぜでべぺ]ー/g, 'ええ');
+  processed = processed.replace(/[おこそとのほもよろをごぞどぼぽょ]ー/g, 'おお');
+
   return processed;
 }
 
