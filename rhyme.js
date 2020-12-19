@@ -9,6 +9,63 @@ words = {
     }
 }
 */
+
+//https://so-zou.jp/web-app/tech/programming/javascript/ajax/post.htm
+function EncodeHTMLForm( data )
+{
+    var params = [];
+
+    for( var name in data )
+    {
+        var value = data[ name ];
+        var param = encodeURIComponent( name ) + '=' + encodeURIComponent( value );
+
+        params.push( param );
+    }
+
+    return params.join( '&' ).replace( /%20/g, '+' );
+}
+////https://so-zou.jp/web-app/tech/programming/javascript/ajax/post.htm
+function kanji_to_kana_to_rhyme(kanji){
+  var data = {
+    app_id: '43f2c0265e0b94ca2a6516c5d8e42c10673ec961684d978fcacffe5e92d9e1b4',
+    sentence: kanji,
+    output_type : 'hiragana',
+    }; // POSTメソッドで送信するデータ
+  
+  
+  var xmlHttpRequest = new XMLHttpRequest();
+  xmlHttpRequest.onreadystatechange = function()
+  {
+      var READYSTATE_COMPLETED = 4;
+      var HTTP_STATUS_OK = 200;
+  
+      if( this.readyState == READYSTATE_COMPLETED
+       && this.status == HTTP_STATUS_OK )
+      {
+          // レスポンスの表示
+          const response = JSON.parse(this.responseText);
+          const kana = response.converted.replace(/\s+/g, "");
+          console.log( kana );
+          generate_in(kana);
+      }
+  }
+  
+  xmlHttpRequest.open( 'POST', 'https://labs.goo.ne.jp/api/hiragana' );
+  
+  // サーバに対して解析方法を指定する
+  xmlHttpRequest.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+  
+  // データをリクエスト ボディに含めて送信する
+  xmlHttpRequest.send( EncodeHTMLForm( data ) );
+}
+
+function text_to_kana_to_rhyme(){
+  const text = document.getElementById('textarea').value;
+  kanji_to_kana_to_rhyme(text);
+
+}
+
 function init_words(){
   for (let name in words){
     words[name]['aiueo'] = kana_to_aiueo(words[name]['kana']);
@@ -50,9 +107,9 @@ function pre_process(text){
   return processed;
 }
 
-function generate_in(){
+function generate_in(kana){
 
-  const text = document.getElementById('textarea').value;
+  const text = kana;
 
   //ひと文字ずつ分解して配列に
   const text_list = pre_process(text).split('');
@@ -174,8 +231,8 @@ function generate_in(){
 }
 
 function btn_click(){
-  generate_in();
-  console.log(document.getElementById('song').checked);
+  text_to_kana_to_rhyme();
+  
 }
 
 function init_options(){

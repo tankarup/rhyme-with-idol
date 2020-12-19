@@ -41,14 +41,14 @@
   <body onload="init()">
     
     <nav class="navbar navbar-primary bg-primary text-light">
-      <h1 class="h3">世界のアイマス韻(α)</h1>
+      <h1 class="h3">世界のアイマス韻(β)</h1>
     </nav>
     <div id="content">
       <div class="form-group">
-        <label for="textarea">ひらがなで文章を入力してください:</label>
-        <textarea id="textarea" class="form-control" rows="5">『あいどるますたー』とは、にせんごねんにあみゅーずめんとしせつむけげーむきからすたーとしたあいどるぷろでゅーすげーむです。
-ぷろでゅーさーとしてあいどるをいくせいするげーむしすてむや、こせいゆたかなきゃらくたー、がっきょくがおおくのおきゃくさまにしじをうけています。
-これまでにかていようげーむそふとをはじめ、らじお、てれびあにめ、もばいるこんてんつからすてーじいべんとまでさまざまなくろすめでぃあてんかいをしています。</textarea>
+        <label for="textarea">文章を入力してください:</label>
+        <textarea id="textarea" class="form-control" rows="5">『アイドルマスター』とは、2005 年にアミューズメント施設向けゲーム機からスタートしたアイドルプロデュースゲームです。
+プロデューサーとしてアイドルを育成するゲームシステムや、個性豊かなキャラクター、楽曲が多くのお客様に支持を受けています。
+これまでに家庭用ゲームソフトをはじめ、ラジオ、テレビアニメ、モバイルコンテンツからステージイベントまでさまざまなクロスメディア展開をしています。</textarea>
         <div id="options"></div>
         <button type="button" class="btn btn-primary" onclick="btn_click();">アイマス韻を探す！</button>
         
@@ -60,11 +60,15 @@
     <div id="informations">
       <ul>
         <li>このアプリは「<a href="https://www.youtube.com/watch?v=KI9bEGOXV9Q">アイマスハッカソン2020ONLINE</a>」で片岡さんが<a href="https://katawo.hatenablog.com/entry/2020/12/06/084800">発表した韻検索</a>に影響され、croMisaPさんの「<a href="https://twitter.com/croMisa/status/1335936499162914816">気付かないだけで世界は韻に溢れてそう</a>」という感想にインスパイアされて作成したものです。</li>
-        <li>アイドルマスターおよび関連作品はバンダイナムコエンターテインメント社が所有するコンテンツです。サンプル文はアイマスホームページの文章を使用させていただいています。</li>
+        <li>アイドルマスターおよび関連作品はバンダイナムコエンターテインメント社が所有するコンテンツです。サンプル文はアイマスホームページの<a href="https://idolmaster-official.jp/about/">紹介文章</a>を使用させていただいています。</li>
         <li>アイドルマスターに関連する用語は以下のデータを使用させていただいています。ありがとうございます。
           <ul>
             <li><a href="https://ime.imas-db.jp/">THE IDOLM@STER IMEユーザー辞書登録用テキスト</a>(by maruamyu)</li>
             <li><a href="https://fujiwarahaji.me/ime">アイマス楽曲変換用IME辞書</a>(by ふじわらはじめ)</li>
+            <li>漢字かな変換にはgooラボAPI「<a href="https://labs.goo.ne.jp/api/jp/hiragana-translation/">ひらがな化API</a>」を使用しています。<a href="http://www.goo.ne.jp/">
+              <img src="http://u.xgoo.jp/img/sgoo.png" width="120px" alt="supported by goo"
+              title="supported by goo">
+              </a></li>
           </ul>
         </li>
         <li>バグ報告や機能改善案などは<a href="https://github.com/tankarup/">Github</a>へ</li>
